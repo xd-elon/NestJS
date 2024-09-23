@@ -1,28 +1,20 @@
 import { Body, Controller, Post, UseGuards } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { AuthGuard } from "@nestjs/passport";
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod";
 
-const authenticateBodySchema = z.object({
-  email: z.string().email(),
-  password: z.string()
-})
-
-type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 
 @Controller('/questions') 
-@UseGuards()
+@UseGuards(AuthGuard('jwt'))
 export class CreateQuestionController {
 
-  constructor(
-    private jwt: JwtService,
-    private prisma: PrismaService
-  ) {}
+  constructor() {}
 
   @Post()
   // @HttpCode(201)
   // @UsePipes(new ZodValidationPipe(authenticateBodySchema))
-  async handle(@Body() body: AuthenticateBodySchema) {
+  async handle() {
     return 'ok'
   } 
 }

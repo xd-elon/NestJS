@@ -27,7 +27,3 @@ Content-Type: application/json
 POST {{baseUrl}}/questions
 Content-Type: application/json
 
-{
-  "email": "alamduarte9@gmail.com",
-  "password": "123456"
-}
